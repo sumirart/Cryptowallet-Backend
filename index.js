@@ -27,6 +27,3 @@ app.delete("/account", (req, res) => {
 app.listen(port, () => {
   console.log(`Server berjalan di http://localhost:${port}`);
 });
-
-console.log("");
-// git config --global credential.helper store
