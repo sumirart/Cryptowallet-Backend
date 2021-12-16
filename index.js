@@ -1,29 +1,25 @@
+// IMPORT
 const express = require("express");
+const cors = require("cors");
+const morgan = require("morgan");
+const bodyParser = require("body-parser");
+const configs = require("./src/configs/configs");
+const routeNavigation = require("./src/routes");
+
+// INITIATE AND USE
 const app = express();
-const port = 3000;
+const port = configs.port;
+app.use(bodyParser.json());
+app.use(cors());
+app.use(morgan("dev"));
 
-app.get("/", (req, res) => {
-  res.send("Homepage");
+// ROUTING
+app.use("/api/v1", routeNavigation);
+app.use("*", (req, res) => {
+  res.status(404).send("Not found!");
 });
 
-app.get("/halo", (req, res) => {
-  res.send("Halo semua semuanya!");
-});
-
-app.get("/json", (req, res) => {
-  res.json({ pesan: "Mengirim Format JSON" });
-});
-
-app.post("/login", (req, res) => {
-  res.status(201).json({ method: "POST", message: "Berhasil login" });
-});
-
-app.delete("/account", (req, res) => {
-  res
-    .status(200)
-    .json({ method: "DELETE", message: "Berhasil menghapus akun" });
-});
-
+// START
 app.listen(port, () => {
   console.log(`Server berjalan di http://localhost:${port}`);
 });
