@@ -3,12 +3,10 @@ const Route = express.Router();
 
 // IMPORT ROUTES
 const banks = require("./banks");
+const auth = require("./auth.js");
 
 // ROUTE PER CATEGORY
 Route.use("/banks", banks);
+Route.use("/auth", auth);
 
 module.exports = Route;
-
-// /api/v1
-// /api/v1/banks
-// /api/v1/banks/bank2
