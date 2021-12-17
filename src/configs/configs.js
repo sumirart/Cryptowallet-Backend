@@ -10,5 +10,5 @@ module.exports = {
     database: process.env.DB_NAME,
     post: process.env.DB_PORT,
   },
-  coinMarketCapAPIKey: "",
+  coinMarketCapAPIKey: process.env.COINMARKETCAP_API_KEY,
 };
