@@ -43,10 +43,10 @@ module.exports = {
         return helper.response(res, 500, null, true, error);
       });
   },
-  getCurrentPrice: (req, res, coinId) => {
+  getCurrentPrice: (res, coinId) => {
     const id = coinId || 1;
 
-    axios({
+    return axios({
       method: "get",
       url: "https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest",
       headers: {
@@ -57,11 +57,7 @@ module.exports = {
       },
     })
       .then((response) => {
-        return helper.response(
-          res,
-          200,
-          response.data.data[id]["quote"]["USD"]["price"]
-        );
+        return response.data.data[id]["quote"]["USD"]["price"];
       })
       .catch((error) => {
         return helper.response(res, 500, null, true, error);
