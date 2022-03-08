@@ -29,8 +29,12 @@ module.exports = {
         );
       } else {
         // validasi apakah user id sama dengan yang ada di dalam token
-        if (req.body.userId) {
-          if (req.body.userId != result.id) {
+        // console.log(req.header("User-Id"));
+        // const userId = req.header('User-Id')
+        const userId = req.get("User-Id"); // must be string
+
+        if (userId) {
+          if (userId !== result.id) {
             return helpers.response(
               res,
               403,
@@ -40,6 +44,19 @@ module.exports = {
             );
           }
         }
+
+        // cek token di body // VERSI LAMA - DELETE SOON
+        // if (req.body.userId) {
+        //   if (req.body.userId != result.id) {
+        //     return helpers.response(
+        //       res,
+        //       403,
+        //       null,
+        //       true,
+        //       "User id tidak sesuai dengan token!"
+        //     );
+        //   }
+        // }
         next();
       }
     });

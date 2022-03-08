@@ -3,7 +3,8 @@ const helper = require("../helpers/responseStandard");
 
 module.exports = {
   getPortfolio: (req, res) => {
-    const { userId } = req.body;
+    // const { userId } = req.body // DELETE SOON
+    const userId = req.get("User-Id");
     if (!userId) {
       return helper.response(res, 400, null, true, "User id harus diisi!");
     }
